@@ -3,11 +3,7 @@ import golosinas.*
 object mariano {
 	const golosinas = []
 	 
-	method comprar(_golosina) { golosinas.add(_golosina) }
-
-	method comprarGolosinas(listaDeGolosinas) {
-		listaDeGolosinas.forEach({golosina => self.comprar(golosina)})
-	}
+	method comprar(listaDeGolosinas) { listaDeGolosinas.forEach({_golosina => golosinas.add(_golosina)}) }
 	
 	method desechar (_golosina) { golosinas.remove(_golosina) }
 	
