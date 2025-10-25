@@ -120,3 +120,55 @@ class Tuttifrutti {
 	method libreGluten() { return libreDeGluten }	
 	method libreGluten(valor) { libreDeGluten = valor }
 }
+
+// Variantes de golosina
+class BombonDuro inherits Bombon {
+	method dureza(){
+		return if (self.peso() == 12) 3 else if (self.peso().between(8,12)) 2 else 1
+	}
+	
+	override method mordisco() {
+		peso = peso - 1
+	}
+}
+
+class CarameloDistintoSabor inherits Caramelo {
+	var sabor = frutilla
+
+	override method sabor() {return sabor}
+
+	method cambiarSabor(unSabor) {
+		sabor = unSabor
+	}
+}
+class CarameloRelleno inherits CarameloDistintoSabor {
+	override method sabor() {return sabor}
+
+	override method mordisco(){
+		super()
+		self.cambiarSabor(chocolate)
+	}
+}
+
+class ObleaCrujiente inherits Oblea {
+	var mordiscos = 0
+
+	override method mordisco(){
+		super() - 3
+		mordiscos = mordiscos + 1
+	}
+
+	method estaDebil() = mordiscos > 3 
+}
+
+class ChocolatinVIP inherits Chocolatin {
+	const humedad
+
+	method humedad() = humedad
+
+	override method peso() = super() * (1 + self.humedad())
+}
+
+class ChocolatinPremium inherits ChocolatinVIP {
+	override method humedad() = super() / 2
+}
