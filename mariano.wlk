@@ -4,6 +4,10 @@ object mariano {
 	const golosinas = []
 	 
 	method comprar(_golosina) { golosinas.add(_golosina) }
+
+	method comprarGolosinas(listaDeGolosinas) {
+		listaDeGolosinas.forEach({golosina => self.comprar(golosina)})
+	}
 	
 	method desechar (_golosina) { golosinas.remove(_golosina) }
 	
@@ -31,8 +35,6 @@ object mariano {
 		return golosinas.all({ _golosina => _golosina.precio() < 10}) 
 	}
 	
-	
-	
 	method golosinaDeSabor(_sabor) {
 		return golosinas.find({ golosina => golosina.sabor() == _sabor })
 	}
@@ -44,7 +46,6 @@ object mariano {
 	method sabores() {
 		return golosinas.map({ golosina => golosina.sabor() }).asSet()
 	}
-
 
 
 	method golosinaMasCara() {
@@ -62,5 +63,10 @@ object mariano {
 	
 	method tieneGolosinaDeSabor(_sabor) {
 		return golosinas.any({_golosina => _golosina.sabor() == _sabor})
+	}
+
+	method baniar(unaGolosina) {
+		const golosinaBañada = new GolosinaBaniada(golosinaInterior = unaGolosina)
+		self.comprar(golosinaBañada)
 	}
 }
